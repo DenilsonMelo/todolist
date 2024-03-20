@@ -17,12 +17,14 @@ import java.util.Optional;
 public class ToDoController {
     @Autowired
     private TodoRepository repository;
+    @CrossOrigin
     @GetMapping
     public ResponseEntity getAllTodos(){
         var allTodos = repository.findAll();
         return ResponseEntity.ok(allTodos);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable String id){
         var todo = repository.findById(id);
