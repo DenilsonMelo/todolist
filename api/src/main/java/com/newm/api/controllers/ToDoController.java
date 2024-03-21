@@ -38,4 +38,11 @@ public class ToDoController {
         repository.save(newTodo);
         return ResponseEntity.status(HttpStatus.CREATED).body(newTodo);
     }
+
+    @CrossOrigin
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteTodo(@PathVariable String id){
+        repository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }
