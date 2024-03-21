@@ -31,6 +31,7 @@ public class ToDoController {
         return ResponseEntity.ok(todo);
     }
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity createTodo(@RequestBody @Valid RequestTodoDTO data){
         Todo newTodo = new Todo(data);

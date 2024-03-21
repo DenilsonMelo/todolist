@@ -1,11 +1,45 @@
 import Modal from "react-modal";
 import { FaTimes } from "react-icons/fa";
 import { Form } from "./styles";
+import { useState } from "react";
 
 export default function NewTodo({ isOpen, onRequestClose }) {
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
-  };
+
+    const data = {
+      title,
+      description,
+      status,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/todo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const json = await response.json();
+      console.log(json);
+    } catch (err) {
+      throw new Error("Erro ao cadastrar uma todo: ", err);
+    }
+
+    console.log(data);
+
+    onRequestClose();
+
+    setTitle("");
+    setDescription("");
+    setStatus("");
+  }
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("");
 
   return (
     <Modal
@@ -22,11 +56,20 @@ export default function NewTodo({ isOpen, onRequestClose }) {
 
       <Form onSubmit={handleSubmit}>
         <span>Titulo</span>
-        <input />
+        <input value={title} onChange={(e) => setTitle(e.target.value)} />
         <span>Descrição</span>
-        <textarea />
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
         <span>Status</span>
-        <select name="select">
+        <select
+          name="select"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          required
+        >
+          <option value="">Selecionar</option>
           <option value="Não iniciado">Não iniciado</option>
           <option value="Em andamento">Em andamento</option>
           <option value="Concluido">Concluido</option>
