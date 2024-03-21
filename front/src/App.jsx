@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import './App.css'
 import Header from './components/Header'
+import TodoList from './components/TodoList';
+import GlobalStyles from './styles/GlobalStyles';
 
 function App() {
   const [todo, setTodo] = useState([]);
@@ -22,7 +23,11 @@ function App() {
   console.log(todo);
   return (
     <>
+       <GlobalStyles />
        <Header />
+       <div className='container'>
+        <TodoList todo={todo}/>
+       </div>
     </>
   )
 }
