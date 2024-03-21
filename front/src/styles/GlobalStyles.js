@@ -58,4 +58,25 @@ export default createGlobalStyle` ${css`
     margin: 0 auto;
     padding: 0 1rem;
   }
+
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 1rem;
+  }
+  .modal-content {
+    width: 100%;
+    max-width: 576px;
+    background: var(--white);
+    padding: 3rem;
+    position: relative;
+    border-radius: 8px;
+  }
 `}`;
