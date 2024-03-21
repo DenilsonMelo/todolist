@@ -1,20 +1,35 @@
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaRegTrashAlt } from "react-icons/fa";
 import { ButtonIcon, Container } from "./styles";
 import { useState } from "react";
 import ViewTodo from "../ViewTodo";
+import { toast } from "react-toastify";
 
-export default function TodoList({ todo }) {
+export default function TodoList({ todo, removeTodo }) {
   const [modalViewTodo, setModalViewTodo] = useState(false);
   const [infoTodo, setInfoTodo] = useState("");
 
-  function handleOpenModalViewTodo(todo){
+  function handleOpenModalViewTodo(todo) {
     setModalViewTodo(true);
     setInfoTodo(todo);
   }
 
-  function handleCloseModalViewTodo(){
+  function handleCloseModalViewTodo() {
     setModalViewTodo(false);
   }
+
+  async function handleRemoveTodo(id) {
+    try {
+      await fetch(`http://localhost:8080/todo/${id}`, {
+        method: "DELETE",
+      });
+      removeTodo(id);
+      notify();
+    } catch (err) {
+      throw new Error("erro: ", err);
+    }
+  }
+
+  const notify = () => toast.success("Tarefa removida com sucesso!");
 
   return (
     <>
@@ -37,7 +52,11 @@ export default function TodoList({ todo }) {
                   <td data-label="Status">{todo.status}</td>
                   <td>
                     <ButtonIcon onClick={() => handleOpenModalViewTodo(todo)}>
-                      Ver <FaEye />
+                      <FaEye />
+                    </ButtonIcon>
+                    |
+                    <ButtonIcon onClick={() => handleRemoveTodo(todo.id)}>
+                      <FaRegTrashAlt />
                     </ButtonIcon>
                   </td>
                 </tr>
@@ -57,7 +76,7 @@ export default function TodoList({ todo }) {
       <ViewTodo
         isOpen={modalViewTodo}
         onRequestClose={handleCloseModalViewTodo}
-        infoTodo={infoTodo} 
+        infoTodo={infoTodo}
       />
     </>
   );

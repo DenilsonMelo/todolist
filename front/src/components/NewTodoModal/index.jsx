@@ -1,6 +1,5 @@
 import Modal from "react-modal";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
 import { ButtonIcon, Form } from "./styles";
 import { useState } from "react";
@@ -82,7 +81,7 @@ export default function NewTodoModal({ isOpen, onRequestClose, addTodo }) {
           <button type="submit">CADASTRAR</button>
         </Form>
       </Modal>
-      <ToastContainer />
+      
     </>
   );
 }

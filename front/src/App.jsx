@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from './components/Header'
 import TodoList from './components/TodoList';
 import GlobalStyles from './styles/GlobalStyles';
@@ -11,6 +13,10 @@ function App() {
 
   const addTodo = useCallback((newTodo) =>{
     setTodo(state => [...state, newTodo])
+  }, []);
+
+  const removeTodo = useCallback((idTodo) =>{
+    setTodo(state => state.filter((todo) => todo.id !== idTodo))
   }, []);
 
   useEffect(() => {
@@ -31,9 +37,10 @@ function App() {
   return (
     <>
        <GlobalStyles />
+       <ToastContainer />
        <Header addTodo={addTodo}/>
        <div className='container'>
-        <TodoList todo={todo}/>
+        <TodoList todo={todo} removeTodo={removeTodo}/>
        </div>
     </>
   )
