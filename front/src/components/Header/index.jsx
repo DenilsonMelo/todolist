@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container, ContainerContent } from "./styles";
-import NewTodoModal from "../NewTodo";
+import NewTodoModal from "../NewTodoModal";
 
 export default function Header({ addTodo }) {
   const [modalNewTodo, setModalNewTodo] = useState(false);

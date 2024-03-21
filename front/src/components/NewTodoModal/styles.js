@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+export const ButtonIcon = styled.button`
+    border: 0;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    border-radius: 8px;
+`;
+
 export const Form = styled.form`
     display: flex;
     flex-direction: column;

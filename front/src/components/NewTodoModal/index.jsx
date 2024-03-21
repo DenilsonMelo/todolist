@@ -2,10 +2,10 @@ import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaTimes } from "react-icons/fa";
-import { Form } from "./styles";
+import { ButtonIcon, Form } from "./styles";
 import { useState } from "react";
 
-export default function NewTodo({ isOpen, onRequestClose, addTodo }) {
+export default function NewTodoModal({ isOpen, onRequestClose, addTodo }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -52,9 +52,9 @@ export default function NewTodo({ isOpen, onRequestClose, addTodo }) {
         overlayClassName="modal-overlay"
         className="modal-content"
       >
-        <button onClick={onRequestClose}>
+        <ButtonIcon onClick={onRequestClose}>
           <FaTimes size={24} />
-        </button>
+        </ButtonIcon>
 
         <h2>Nova tarefa</h2>
 
