@@ -1,4 +1,6 @@
 import Modal from "react-modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { FaTimes } from "react-icons/fa";
 import { Form } from "./styles";
 import { useState } from "react";
@@ -24,6 +26,7 @@ export default function NewTodo({ isOpen, onRequestClose }) {
 
       const json = await response.json();
       console.log(json);
+      notify();
     } catch (err) {
       throw new Error("Erro ao cadastrar uma todo: ", err);
     }
@@ -41,42 +44,47 @@ export default function NewTodo({ isOpen, onRequestClose }) {
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
 
+  const notify = () => toast.success("Tarefa cadastrada com sucesso!");
+
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      overlayClassName="modal-overlay"
-      className="modal-content"
-    >
-      <button onClick={onRequestClose}>
-        <FaTimes size={24} />
-      </button>
+    <>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onRequestClose}
+        overlayClassName="modal-overlay"
+        className="modal-content"
+      >
+        <button onClick={onRequestClose}>
+          <FaTimes size={24} />
+        </button>
 
-      <h2>Nova tarefa</h2>
+        <h2>Nova tarefa</h2>
 
-      <Form onSubmit={handleSubmit}>
-        <span>Titulo</span>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} />
-        <span>Descrição</span>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <span>Status</span>
-        <select
-          name="select"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          required
-        >
-          <option value="">Selecionar</option>
-          <option value="Não iniciado">Não iniciado</option>
-          <option value="Em andamento">Em andamento</option>
-          <option value="Concluido">Concluido</option>
-        </select>
+        <Form onSubmit={handleSubmit}>
+          <span>Titulo</span>
+          <input value={title} onChange={(e) => setTitle(e.target.value)} />
+          <span>Descrição</span>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <span>Status</span>
+          <select
+            name="select"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            required
+          >
+            <option value="">Selecionar</option>
+            <option value="Não iniciado">Não iniciado</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Concluido">Concluido</option>
+          </select>
 
-        <button type="submit">CADASTRAR</button>
-      </Form>
-    </Modal>
+          <button type="submit">CADASTRAR</button>
+        </Form>
+      </Modal>
+      <ToastContainer />
+    </>
   );
 }
