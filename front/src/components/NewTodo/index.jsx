@@ -5,7 +5,7 @@ import { FaTimes } from "react-icons/fa";
 import { Form } from "./styles";
 import { useState } from "react";
 
-export default function NewTodo({ isOpen, onRequestClose }) {
+export default function NewTodo({ isOpen, onRequestClose, addTodo }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -25,13 +25,11 @@ export default function NewTodo({ isOpen, onRequestClose }) {
       });
 
       const json = await response.json();
-      console.log(json);
+      addTodo(json);
       notify();
     } catch (err) {
       throw new Error("Erro ao cadastrar uma todo: ", err);
     }
-
-    console.log(data);
 
     onRequestClose();
 

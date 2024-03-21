@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Container, ContainerContent } from "./styles";
-import NewTodo from "../NewTodo";
+import NewTodoModal from "../NewTodo";
 
-export default function Header() {
+export default function Header({ addTodo }) {
   const [modalNewTodo, setModalNewTodo] = useState(false);
 
   const handleOpenModalNewTodo = () => {
@@ -25,7 +25,11 @@ export default function Header() {
           </button>
         </ContainerContent>
       </Container>
-      <NewTodo isOpen={modalNewTodo} onRequestClose={handleCloseModalNewTodo} />
+      <NewTodoModal 
+        isOpen={modalNewTodo} 
+        onRequestClose={handleCloseModalNewTodo}
+        addTodo={addTodo} 
+      />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Header from './components/Header'
 import TodoList from './components/TodoList';
 import GlobalStyles from './styles/GlobalStyles';
@@ -8,6 +8,10 @@ ReactModal.setAppElement('#root');
 
 function App() {
   const [todo, setTodo] = useState([]);
+
+  const addTodo = useCallback((newTodo) =>{
+    setTodo(state => [...state, newTodo])
+  }, []);
 
   useEffect(() => {
     async function fetchData(){
@@ -27,7 +31,7 @@ function App() {
   return (
     <>
        <GlobalStyles />
-       <Header />
+       <Header addTodo={addTodo}/>
        <div className='container'>
         <TodoList todo={todo}/>
        </div>
