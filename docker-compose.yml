@@ -10,30 +10,17 @@ services:
     tty: true
     volumes:
       - ./api/db_data:/var/lib/postgresql/db_postgres
-      - ./api/src/main/resources/db.migration/V1__create-table-todo.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./api/src/main/resources/db/migration/V1__create-table-todo.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:
       - "5432:5432"
-
-  api_java:
-    image: openjdk:17-jdk-slim
-    container_name: api_java
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./api/target/api-0.0.1-SNAPSHOT.jar:/app/minha-aplicacao.jar
-    command: ["java", "-jar", "/app/minha-aplicacao.jar"]
-    depends_on:
-      - db_postgres  
 
   front_react:
     build: ./front
     container_name: front_react
-    command: sh -c "yarn && yarn dev"
     ports:
-      - "5173:5173"
+      - "3000:3000"
     volumes:
       - type: bind
         source: ./front
         target: /usr/app
-      - ./front/node_modules:/usr/app/node_modules
     tty: true
