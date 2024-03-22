@@ -16,8 +16,11 @@ export default function ViewTodo({ isOpen, onRequestClose, infoTodo }) {
         <FaTimes size={24} />
       </ButtonIcon>
       <InfoModal>
+        <span>Titulo</span>
         <h3>{infoTodo.title}</h3>
+        <span>Descrição</span>
         <p>{infoTodo.description}</p>
+        <span>Status</span>
         <p>{infoTodo.status}</p>
       </InfoModal>
     </Modal>
