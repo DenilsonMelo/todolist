@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  db_postgres:
+    image: "postgres"
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "newm"
+    tty: true
+    volumes:
+      - ./api/db_data:/var/lib/postgresql/db_postgres
+      - ./api/src/main/resources/db/migration/V1__create-table-todo.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - "5432:5432"
+
+  front_react:
+    build: ./front
+    container_name: front_react
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: ./front
+        target: /usr/app
+    tty: true
