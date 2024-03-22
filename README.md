@@ -42,3 +42,6 @@ A aplicação desenvolvida tem a seguinte estrutura:
    - Lombok
    - Flyway
    - Postgres
+
+## ⛳ Endpoints da API
+<img src="./front/public/documentation.png">
